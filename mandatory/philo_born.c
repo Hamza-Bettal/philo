@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/09 22:06:30 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/09 22:25:14 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,16 @@ int	philo_birth(char **av, int ac)
 	int		i;
 	
 	i = 0;
-	philo->table = table;
+	table = malloc(sizeof(t_table));
 	if (fill_table(table, av, ac))
 		return (1);
 	philo = malloc(sizeof(t_philo) * table->num_of_philo);
+	if (!philo)
+		return (printf("error with mallo\n"), 1);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->num_of_philo);
 	if (!philo || !table->forks)
 		(write(2, "Error\n", 6));
+	philo->table = table;
 	while (i < philo->table->num_of_philo)
 	{
 		philo[i].id = i + 1;
