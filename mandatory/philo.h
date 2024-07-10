@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:48:09 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/10 11:51:44 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/10 13:03:18 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 typedef struct s_table
 {
+	int				k;
 	size_t	time_to_die;
 	size_t	time_to_eat;
 	size_t	time_to_sleep;

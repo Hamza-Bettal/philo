@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/10 09:19:25 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/10 12:49:18 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ size_t	get_time(void)
 
 int		fill_table(t_table *table, char **av, int ac)
 {
+	(void)ac;
 	table->num_of_philo = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
-	if (ac == 6)
-		table->num_of_meals = atoi(av[5]);
-	else
-		table->num_of_meals = -1;
 	if (pthread_mutex_init(&table->print, NULL) 
 	|| pthread_mutex_init(&table->dead_mutex, NULL) 
 	|| pthread_mutex_init(&table->meal_mutex, NULL))
@@ -46,7 +43,7 @@ int	philo_birth(char **av, int ac)
 	int		i;
 	
 	i = -1;
-	table = malloc(sizeof(t_table));
+	table = malloc(sizeof(t_table) * ft_atoi(av[1]));
 	if (fill_table(table, av, ac))
 		return (1);
 	philo = malloc(sizeof(t_philo) * table->num_of_philo);
@@ -56,6 +53,10 @@ int	philo_birth(char **av, int ac)
 	philo->table = table;
 	while (++i < philo->table->num_of_philo)
 	{
+		if (ac == 6)
+			philo->table[i].num_of_meals = ft_atoi(av[5]);
+		else
+			philo->table[i].num_of_meals = -1;
 		1 && (philo[i].id = i + 1, philo[i].start = table->start);
 		1 && (philo[i].last_meal = philo[i].start, philo[i].table = table);
 		philo[i].r_fork = &table->forks[i];
