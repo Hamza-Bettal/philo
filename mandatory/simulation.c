@@ -6,19 +6,19 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 18:55:14 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/09 20:23:09 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/10 11:53:17 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void ft_usleep(int time)
+void ft_usleep(size_t time)
 {
 	size_t start;
 
 	start = get_time();
 	while (get_time() - start < time)
-		usleep(10);
+		usleep(100);
 }
 
 void ft_printf(t_philo *philo, char *str)
@@ -27,15 +27,20 @@ void ft_printf(t_philo *philo, char *str)
 	printf("%ld %d %s\n", get_time() - philo->start, philo->id, str);
 	pthread_mutex_unlock(&philo->table->print);
 }
-void	*philo_life(void *arg)
+
+void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
+	int 	i;
 
 	philo = (t_philo *)arg;
+	i = 0;
 	if (philo->id % 2 == 0)
-		ft_usleep(100);
-	while(1)
+		ft_usleep(10);
+	while (1)
 	{
+		if (++i == philo->table->num_of_meals)
+			return (philo->table->dead = 1, NULL);
 		ft_printf(philo, "is thinking");
 		pthread_mutex_lock(philo->r_fork);
 		ft_printf(philo, "has taken a fork");
@@ -48,6 +53,12 @@ void	*philo_life(void *arg)
 		pthread_mutex_unlock(philo->l_fork);
 		ft_printf(philo, "is sleeping");
 		ft_usleep(philo->table->time_to_sleep);
+		if (get_time() - philo->last_meal >= philo->table->time_to_die)
+		{
+			ft_printf(philo, "died");
+			philo->table->dead = 1;
+			return (NULL);
+		}
 	}
 } 
 
@@ -56,13 +67,19 @@ void	start_simulation(t_philo *philo, t_table *table)
 
 	int i;
 
-	i = 0;
-	while (i < philo->table->num_of_philo)
+	i = -1;
+	(void)table;
+	while (++i < philo->table->num_of_philo)
 	{
-		pthread_create(&philo[i].thread, NULL, philo_life, &philo[i]);
+		pthread_create(&philo[i].thread, NULL, philo_routine, &philo[i]);
 		pthread_detach(philo[i].thread);
-		i++;
 	}
-	while (1)
+	while (!table->dead)
 		;
+	pthread_mutex_destroy(&table->print);
+	pthread_mutex_destroy(&table->dead_mutex);
+	pthread_mutex_destroy(&table->meal_mutex);
+	free(table->forks);
+	free(table);
+	free(philo);
 }

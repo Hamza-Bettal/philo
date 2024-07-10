@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/09 22:25:14 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/10 09:19:25 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,23 @@ int	philo_birth(char **av, int ac)
 	t_table	*table;
 	int		i;
 	
-	i = 0;
+	i = -1;
 	table = malloc(sizeof(t_table));
 	if (fill_table(table, av, ac))
 		return (1);
 	philo = malloc(sizeof(t_philo) * table->num_of_philo);
-	if (!philo)
-		return (printf("error with mallo\n"), 1);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->num_of_philo);
 	if (!philo || !table->forks)
 		(write(2, "Error\n", 6));
 	philo->table = table;
-	while (i < philo->table->num_of_philo)
+	while (++i < philo->table->num_of_philo)
 	{
-		philo[i].id = i + 1;
-		philo[i].start = table->start;
-		philo[i].last_meal = philo[i].start;
-		philo[i].table = table;
+		1 && (philo[i].id = i + 1, philo[i].start = table->start);
+		1 && (philo[i].last_meal = philo[i].start, philo[i].table = table);
 		philo[i].r_fork = &table->forks[i];
 		philo[i].l_fork = &table->forks[(i + 1) % table->num_of_philo];
 		if (pthread_mutex_init(&table->forks[i], NULL))
 			return (write(2, "Error\n", 6), 1);
-		i++;
 	}
 	start_simulation(philo, table);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:50:04 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/05 12:36:27 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/10 11:10:18 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,22 @@ long	ft_atoi(char *str)
 	return (no_overflow(sign, n, count));
 }
 
-void	parse(char **av, int ac)
+int	parse(char **av, int ac)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	if (ac > 4 && ac < 7)
 	{
+		if (ft_atoi(av[i]) <= 0)
+			return (write(2, "wrong input\n", 12), 1);
 		while (av[++i])
 		{
-			if (ft_atoi(av[i]) <= 0)
-				(write(2, "wrong input\n", 12), exit(1));
+			if (ft_atoi(av[i]) < 0)
+				return (write(2, "wrong input\n", 12), 1);
 		}
 	}
 	else
-		(write(2, "wrong input\n", 12), exit(1));
+		return (write(2, "wrong input\n", 12), 1);
+	return (0);
 }

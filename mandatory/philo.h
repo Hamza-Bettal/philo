@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:48:09 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/09 20:25:47 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/10 11:51:44 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 
 typedef struct s_table
 {
-	int	time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
-	int num_of_philo;
-	int num_of_meals;
-	int	dead;
+	size_t	time_to_die;
+	size_t	time_to_eat;
+	size_t	time_to_sleep;
+	int		num_of_meals;
+	int		num_of_philo;
+	int		dead;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	dead_mutex;
@@ -47,7 +47,7 @@ typedef struct s_philo
 	size_t			last_meal;
 }	t_philo;
 
-void	parse(char **av, int ac);
+int		parse(char **av, int ac);
 long	ft_atoi(char *str);
 size_t	get_time(void);
 int		philo_birth(char **av, int ac);
