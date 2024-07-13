@@ -6,13 +6,14 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:48:09 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/10 13:03:18 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/11 08:54:57 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+#include <string.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -53,5 +54,6 @@ long	ft_atoi(char *str);
 size_t	get_time(void);
 int		philo_birth(char **av, int ac);
 void	start_simulation(t_philo *philo, t_table *table);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

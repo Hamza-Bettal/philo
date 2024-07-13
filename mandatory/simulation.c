@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 18:55:14 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/10 13:05:56 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/14 00:09:42 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,23 @@ void ft_printf(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->table->print);
 	printf("%ld %d %s\n", get_time() - philo->start, philo->id, str);
-	pthread_mutex_unlock(&philo->table->print);
+	if (ft_strncmp(str, "died", 4))
+		pthread_mutex_unlock(&philo->table->print);
+}
+
+void	check_forks(t_philo *philo)
+{
+	pthread_mutex_lock(philo->r_fork);
+	ft_printf(philo, "has taken a fork");
+	pthread_mutex_lock(philo->l_fork);
+	ft_printf(philo, "has taken a fork");
+	ft_printf(philo, "is eating");
+	if (philo->table[philo->id - 1].num_of_meals != -1)
+		philo->table[philo->id - 1].num_of_meals--;
+	philo->last_meal = get_time();
+	ft_usleep(philo->table->time_to_eat);
+	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
 }
 
 void	*philo_routine(void *arg)
@@ -34,22 +50,10 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		ft_usleep(10);
-	while (philo->table[philo->id - 1].num_of_meals == -1 || philo->table[philo->id - 1].num_of_meals > 0)
+		ft_usleep(100);
+	while (1)
 	{
-		ft_printf(philo, "is thinking");
-		pthread_mutex_lock(philo->r_fork);
-		ft_printf(philo, "has taken a fork");
-		pthread_mutex_lock(philo->l_fork);
-		ft_printf(philo, "has taken a fork");
-		ft_printf(philo, "is eating");
-		if (philo->table[philo->id - 1].num_of_meals != -1)
-			philo->table[philo->id - 1].num_of_meals--;
-		printf("%d num_of_meals = %d\n", philo->id, philo->table[philo->id - 1].num_of_meals);
-		philo->last_meal = get_time();
-		ft_usleep(philo->table->time_to_eat);
-		pthread_mutex_unlock(philo->r_fork);
-		pthread_mutex_unlock(philo->l_fork);
+		check_forks(philo);
 		if (philo->table[philo->id - 1].num_of_meals == 0)
 		{
 			pthread_mutex_lock(&philo->table->meal_mutex);
@@ -59,11 +63,11 @@ void	*philo_routine(void *arg)
 		}
 		ft_printf(philo, "is sleeping");
 		ft_usleep(philo->table->time_to_sleep);
+		ft_printf(philo, "is thinking");
 		if (get_time() - philo->last_meal >= philo->table->time_to_die)
 		{
-			ft_printf(philo, "died");
-			philo->table->dead = 1;
-			return (NULL);
+			pthread_mutex_lock(&philo->table->dead_mutex);
+			return (philo->table->dead = 1, ft_printf(philo, "died"), NULL);
 		}
 	}
 	return (NULL);
@@ -71,15 +75,11 @@ void	*philo_routine(void *arg)
 
 void	start_simulation(t_philo *philo, t_table *table)
 {
-
 	int i;
 	int j;
 	int k;
 
-	i = -1;
-	j = philo->table->num_of_meals;
-	k = 0;
-	(void)table;
+	1 && (i = -1, j = philo->table->num_of_meals, k = 0);
 	while (++i < philo->table->num_of_philo)
 	{
 		pthread_create(&philo[i].thread, NULL, philo_routine, &philo[i]);
@@ -89,7 +89,6 @@ void	start_simulation(t_philo *philo, t_table *table)
 	{
 		if (philo->table->dead)
 			break ;
-		i = -1;
 		if (table->k == philo->table->num_of_philo)
 		{
 			printf("All philos ate %d times\n", j);
@@ -99,7 +98,5 @@ void	start_simulation(t_philo *philo, t_table *table)
 	pthread_mutex_destroy(&table->print);
 	pthread_mutex_destroy(&table->dead_mutex);
 	pthread_mutex_destroy(&table->meal_mutex);
-	free(table->forks);
-	free(table);
-	free(philo);
+	(free(table->forks), free(table), free(philo));
 }
