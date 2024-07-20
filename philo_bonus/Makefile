@@ -6,20 +6,19 @@
 #    By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 08:55:53 by hbettal           #+#    #+#              #
-#    Updated: 2024/07/12 11:57:41 by hbettal          ###   ########.fr        #
+#    Updated: 2024/07/18 16:47:38 by hbettal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
-NAME = philo
+NAME = philosophers_bonus
 
-HEADER = mandatory/philo.h
+HEADER = philo_bonus.h
 
-OBJ =	mandatory/philo.o				mandatory/parsing.o \
-		mandatory/philo_born.o			mandatory/simulation.o
+OBJ =	philo_bonus.o			parsing.o		philo_born_bonus.o		family_table.o
 
 all: $(NAME)
 	@echo "\033[1;32mCompilation Completed Successfully! ✅\033[0;m"
