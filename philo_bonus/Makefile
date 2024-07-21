@@ -6,19 +6,19 @@
 #    By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 08:55:53 by hbettal           #+#    #+#              #
-#    Updated: 2024/07/18 16:47:38 by hbettal          ###   ########.fr        #
+#    Updated: 2024/07/21 19:22:48 by hbettal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
-NAME = philosophers_bonus
+NAME = philo_bonus
 
 HEADER = philo_bonus.h
 
-OBJ =	philo_bonus.o			parsing.o		philo_born_bonus.o		family_table.o
+OBJ =	philo_bonus.o			parsing_bonus.o		philo_born_bonus.o		family_table.o
 
 all: $(NAME)
 	@echo "\033[1;32mCompilation Completed Successfully! ✅\033[0;m"
@@ -27,7 +27,7 @@ $(NAME) : $(OBJ) $(HEADER)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 %.o : %.c $(HEADER)
-	@echo "\033[0;34mCompiling $< .\033[0;m"
+	@echo "\033[0;36mCompiling $< .\033[0;m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

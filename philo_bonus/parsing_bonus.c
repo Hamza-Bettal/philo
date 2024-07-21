@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:50:04 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/15 22:38:09 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/21 17:37:44 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	cleaner(t_philo *philo)
+{
+	sem_unlink("forks_sem");
+	sem_unlink("print_sem");
+	sem_unlink("dead_sem");
+	sem_unlink("done_sem");
+	if (sem_close(philo->data->dead_sem) == -1)
+		printf("error");
+	if (sem_close(philo->data->forks_sem) == -1)
+		printf("error");
+	if (sem_close(philo->data->done_sem) == -1)
+		printf("error");
+	if (sem_close(philo->data->print_sem) == -1)
+		printf("error");
+	free(philo);
+}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -69,7 +86,7 @@ int	parsing(int ac, char **av)
 			return (write(2, "wrong input\n", 12), 1);
 			if (ft_atoi(av[2]) < 61 || ft_atoi(av[3]) < 61 || ft_atoi(av[4]) < 61)
 				return (write(2, "wrong input\n", 12), 1);
-		if (av[5] && ft_atoi(av[5]) < 1)
+		if (av[5] && ft_atoi(av[5]) < 0)
 			return (write(2, "wrong input\n", 12), 1);
 	}
 	else

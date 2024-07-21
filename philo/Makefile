@@ -6,15 +6,15 @@
 #    By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 08:55:53 by hbettal           #+#    #+#              #
-#    Updated: 2024/07/15 22:17:32 by hbettal          ###   ########.fr        #
+#    Updated: 2024/07/21 19:21:53 by hbettal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror
 
-NAME = philosophers
+NAME = philo
 
 HEADER = philo.h
 
@@ -27,7 +27,7 @@ $(NAME) : $(OBJ) $(HEADER)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 %.o : %.c $(HEADER)
-	@echo "\033[0;34mCompiling $< .\033[0;m"
+	@echo "\033[0;36mCompiling $< .\033[0;m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

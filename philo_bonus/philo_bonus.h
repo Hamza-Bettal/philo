@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 14:06:05 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/20 11:54:43 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:01:15 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,21 @@ typedef struct s_table
 	int				time_to_sleep;
 	int				max_eat;
 	size_t			living_time;
-	size_t		start;
+	size_t			start;
 	int				eat;
 	sem_t			*forks_sem;
 	sem_t			*print_sem;
 	sem_t			*dead_sem;
-	sem_t			*done;
+	sem_t			*done_sem;
 } t_table;
 
 typedef struct s_philo
 {
 	int			id;
-	int			num_of_meals;
 	pid_t		pid;
 	t_table		*data;
 	int			dead;
 } t_philo;
-
 
 int			parsing(int ac, char **av);
 long		ft_atoi(char *str);
@@ -56,7 +54,7 @@ size_t		get_time(void);
 void		ft_usleep(size_t time);
 void		ft_printf(t_philo *philo, char *str);
 void		start_simulation(t_philo philo);
-void		*close_kill(void *arg);
-void		*wait_dead(void *prog);
+void		check_meals_death(t_philo *philo);
+void		cleaner(t_philo *philo);
 
 #endif
