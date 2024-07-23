@@ -6,14 +6,14 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:48:09 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/21 18:41:07 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/23 13:24:26 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <string.h>
+# include <string.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -35,7 +35,6 @@ typedef struct s_table
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	meal_mutex;
 }	t_table;
-
 
 typedef struct s_philo
 {

@@ -6,13 +6,13 @@
 #    By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 08:55:53 by hbettal           #+#    #+#              #
-#    Updated: 2024/07/21 19:22:48 by hbettal          ###   ########.fr        #
+#    Updated: 2024/07/22 17:13:12 by hbettal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = philo_bonus
 

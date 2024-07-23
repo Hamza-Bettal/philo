@@ -6,13 +6,13 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 14:05:53 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/21 17:41:13 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/21 21:28:06 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (parsing(ac, av) || philo_life(ac, av))
 		return (1);

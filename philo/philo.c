@@ -6,13 +6,13 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:48:06 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/21 13:01:44 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/21 21:23:17 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (parse(av, ac) || philo_birth(av, ac))
 		return (1);

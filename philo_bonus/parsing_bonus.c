@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:50:04 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/21 17:37:44 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/21 21:27:58 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	parsing(int ac, char **av)
 	{
 		if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) >= 200)
 			return (write(2, "wrong input\n", 12), 1);
-			if (ft_atoi(av[2]) < 61 || ft_atoi(av[3]) < 61 || ft_atoi(av[4]) < 61)
-				return (write(2, "wrong input\n", 12), 1);
+		if (ft_atoi(av[2]) < 61 || ft_atoi(av[3]) < 61 || ft_atoi(av[4]) < 61)
+			return (write(2, "wrong input\n", 12), 1);
 		if (av[5] && ft_atoi(av[5]) < 0)
 			return (write(2, "wrong input\n", 12), 1);
 	}

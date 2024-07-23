@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/21 12:20:24 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/21 21:25:48 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	philo_info(t_philo *philo, t_table *table, int ac, char **av)
 	return (0);
 }
 
-int		fill_table(t_table *table, char **av)
+int	fill_table(t_table *table, char **av)
 {
 	table->num_of_philo = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
-	if (pthread_mutex_init(&table->print, NULL) 
-	|| pthread_mutex_init(&table->dead_mutex, NULL) 
-	|| pthread_mutex_init(&table->meal_mutex, NULL))
+	if (pthread_mutex_init(&table->print, NULL)
+		|| pthread_mutex_init(&table->dead_mutex, NULL)
+		|| pthread_mutex_init(&table->meal_mutex, NULL))
 		return (write(2, "Error\n", 6), 1);
 	table->dead = 0;
 	return (0);
@@ -60,7 +60,7 @@ int	philo_birth(char **av, int ac)
 	t_philo	*philo;
 	t_table	*table;
 	int		i;
-	
+
 	i = -1;
 	table = malloc(sizeof(t_table) * ft_atoi(av[1]));
 	if (fill_table(table, av))

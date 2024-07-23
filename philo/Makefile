@@ -6,7 +6,7 @@
 #    By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 08:55:53 by hbettal           #+#    #+#              #
-#    Updated: 2024/07/21 19:21:53 by hbettal          ###   ########.fr        #
+#    Updated: 2024/07/23 17:23:17 by hbettal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = philo
+ NAME = philo
 
 HEADER = philo.h
 
