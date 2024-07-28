@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:55:45 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/22 14:44:01 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/28 12:03:55 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	ft_usleep(size_t time, t_philo philo)
 	{
 		usleep(100);
 		if (get_time() - philo.data->living_time >= philo.data->time_to_die)
-		{
-			sem_wait(philo.data->dead_sem);
 			(ft_printf(&philo, "died"), sem_post(philo.data->done_sem));
-		}
 	}
 }
 

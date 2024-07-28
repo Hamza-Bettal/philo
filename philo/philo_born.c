@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/21 21:25:48 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/28 11:46:40 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	philo_birth(char **av, int ac)
 
 	i = -1;
 	table = malloc(sizeof(t_table) * ft_atoi(av[1]));
-	if (fill_table(table, av))
+	if (!table || fill_table(table, av))
 		return (1);
 	philo = malloc(sizeof(t_philo) * table->num_of_philo);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->num_of_philo);

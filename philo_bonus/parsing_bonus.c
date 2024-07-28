@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:50:04 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/21 21:27:58 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/28 11:56:35 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	cleaner(t_philo *philo)
 {
-	sem_unlink("forks_sem");
-	sem_unlink("print_sem");
 	sem_unlink("dead_sem");
-	sem_unlink("done_sem");
 	if (sem_close(philo->data->dead_sem) == -1)
 		printf("error");
+	sem_unlink("forks_sem");
 	if (sem_close(philo->data->forks_sem) == -1)
 		printf("error");
+	sem_unlink("done_sem");
 	if (sem_close(philo->data->done_sem) == -1)
 		printf("error");
+	sem_unlink("print_sem");
 	if (sem_close(philo->data->print_sem) == -1)
 		printf("error");
 	free(philo);
@@ -82,12 +82,14 @@ int	parsing(int ac, char **av)
 {
 	if (ac > 4 && ac < 7)
 	{
-		if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) >= 200)
+		if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) > 200)
 			return (write(2, "wrong input\n", 12), 1);
-		if (ft_atoi(av[2]) < 61 || ft_atoi(av[3]) < 61 || ft_atoi(av[4]) < 61)
+		if (ft_atoi(av[2]) < 60 || ft_atoi(av[3]) < 60 || ft_atoi(av[4]) < 60)
 			return (write(2, "wrong input\n", 12), 1);
-		if (av[5] && ft_atoi(av[5]) < 0)
+		if (ac == 6 && ft_atoi(av[5]) < 0)
 			return (write(2, "wrong input\n", 12), 1);
+		if (ac == 6 && ft_atoi(av[5]) == 0)
+			return (1);
 	}
 	else
 		return (write(2, "wrong input\n", 12), 1);

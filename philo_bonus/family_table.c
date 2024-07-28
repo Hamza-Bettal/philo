@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 01:03:33 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/22 14:50:57 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/28 12:10:01 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ void	forks_handler(t_philo philo)
 	}
 	sem_wait(philo.data->forks_sem);
 	(ft_printf(&philo, "has taken a fork"), ft_printf(&philo, "is eating"));
+	sem_wait(philo.data->print_sem);
 	if (philo.data->max_eat != -1)
 		philo.data->eat++;
-	if (philo.data->max_eat != -1 && philo.data->eat == philo.data->max_eat)
+	if (philo.data->max_eat != -1 && philo.data->eat >= philo.data->max_eat)
 		sem_post(philo.data->done_sem);
+	sem_post(philo.data->print_sem);
 	philo.data->living_time = get_time();
 	ft_usleep(philo.data->time_to_eat, philo);
 	(sem_post(philo.data->forks_sem), sem_post(philo.data->forks_sem));
@@ -55,7 +57,7 @@ void	start_simulation(t_philo philo)
 	philo.data->start = get_time();
 	philo.data->living_time = philo.data->start;
 	if (philo.id % 2 == 0)
-		ft_usleep(philo.data->time_to_eat, philo);
+		ft_usleep(10, philo);
 	while (1)
 	{
 		forks_handler(philo);
