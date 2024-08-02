@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:48:09 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/23 13:24:26 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/08/02 12:17:37 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/time.h>
 # include <limits.h>
 
+typedef struct s_philo	t_philo;
+
 typedef struct s_table
 {
 	int				k;
@@ -34,9 +36,10 @@ typedef struct s_table
 	pthread_mutex_t	print;
 	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	meal_mutex;
+	t_philo			*philos;
 }	t_table;
 
-typedef struct s_philo
+struct s_philo
 {
 	int				id;
 	pthread_t		thread;
@@ -45,13 +48,16 @@ typedef struct s_philo
 	t_table			*table;
 	size_t			start;
 	size_t			last_meal;
-}	t_philo;
+};
 
 int		parse(char **av, int ac);
 long	ft_atoi(char *str);
 size_t	get_time(void);
+void	ft_printf(t_philo *philo, char *str);
 int		philo_birth(char **av, int ac);
 void	start_simulation(t_philo *philo, t_table *table);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	*monitoring(void *p);
+int		is_dead(t_philo *dinner);
 
 #endif

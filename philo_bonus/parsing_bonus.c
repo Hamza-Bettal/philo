@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:50:04 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/28 11:56:35 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/08/02 12:32:47 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	cleaner(t_philo *philo)
 		printf("error");
 	sem_unlink("forks_sem");
 	if (sem_close(philo->data->forks_sem) == -1)
-		printf("error");
-	sem_unlink("done_sem");
-	if (sem_close(philo->data->done_sem) == -1)
 		printf("error");
 	sem_unlink("print_sem");
 	if (sem_close(philo->data->print_sem) == -1)

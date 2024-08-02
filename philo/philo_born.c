@@ -6,7 +6,7 @@
 /*   By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:38:21 by hbettal           #+#    #+#             */
-/*   Updated: 2024/07/28 11:46:40 by hbettal          ###   ########.fr       */
+/*   Updated: 2024/07/29 12:37:10 by hbettal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	philo_birth(char **av, int ac)
 	philo->table = table;
 	if (philo_info(philo, table, ac, av))
 		return (1);
+	table->philos = philo;
 	start_simulation(philo, table);
 	return (0);
 }

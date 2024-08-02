@@ -6,7 +6,7 @@
 #    By: hbettal <hbettal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 08:55:53 by hbettal           #+#    #+#              #
-#    Updated: 2024/07/23 17:23:17 by hbettal          ###   ########.fr        #
+#    Updated: 2024/08/02 12:48:11 by hbettal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
- NAME = philo
+NAME = philo
 
 HEADER = philo.h
 
-OBJ =	philo.o			parsing.o		philo_born.o		simulation.o
+OBJ =	philo.o			parsing.o		philo_born.o		simulation.o		monitor.o
 
 all: $(NAME)
 	@echo "\033[1;32mCompilation Completed Successfully! ✅\033[0;m"
